@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pro Cricket Analysis</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="/" class="logo">🏏 Pro<span>Analysis</span></a>
+        <div>
+            <a href="/login" class="btn">Login</a>
+        </div>
+    </nav>
+
+    <div class="container hero">
+        <h1>AI-Powered Batting Analysis</h1>
+        <p>Take your game to the next level. Upload your batting videos and get instant feedback on stance, weight transfer, and bio-mechanics using advanced Computer Vision.</p>
+        
+        <div style="display: flex; gap: 1rem; justify-content: center;">
+            <a href="/login" class="btn">Get Started</a>
+            <a href="#features" class="btn btn-secondary">Learn More</a>
+        </div>
+
+        <div style="margin-top: 4rem;">
+            <!-- Placeholder for a cool graphic or demo video -->
+            <div class="glass-card" style="height: 300px; display: flex; align-items: center; justify-content: center; color: #555;">
+                [ Demo Visual / Animation ]
+            </div>
+        </div>
+    </div>
+    
+    <div class="container" id="features" style="padding-bottom: 4rem;">
+        <h2 style="text-align: center; margin-bottom: 3rem;">How It Works</h2>
+        <div class="dashboard-grid" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
+            <div class="glass-card">
+                <h3>1. Upload</h3>
+                <p style="color: #aaa;">Upload any MP4 video of your batting session. Supports slow-mo.</p>
+            </div>
+            <div class="glass-card">
+                <h3>2. Analyze</h3>
+                <p style="color: #aaa;">Our AI analyzes key skeletal points and weight distribution in real-time.</p>
+            </div>
+            <div class="glass-card">
+                <h3>3. Improve</h3>
+                <p style="color: #aaa;">Get visual feedback overlay on your video to correct your technique.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

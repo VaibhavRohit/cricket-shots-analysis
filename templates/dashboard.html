@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Pro Cricket Analysis</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <nav class="navbar">
+        <a href="/" class="logo">🏏 Pro<span>Analysis</span></a>
+        <div style="display: flex; align-items: center; gap: 1rem;">
+            <span style="color: var(--text-secondary);">Hi, {{ user }}</span>
+            <a href="/logout" class="btn btn-secondary" style="padding: 8px 16px; font-size: 0.9rem;">Logout</a>
+        </div>
+    </nav>
+
+    <div class="flash-messages">
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        {% for message in messages %}
+        <div class="flash-msg">{{ message }}</div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+    </div>
+
+    <div class="container">
+        <h1 style="margin-top: 2rem;">Analysis Dashboard</h1>
+
+        <div class="glass-card" style="margin-top: 2rem;">
+            <form action="/analyze" method="POST" enctype="multipart/form-data">
+                <div class="dashboard-grid" style="margin-top: 0; gap: 1rem;">
+                    <div>
+                        <label style="display: block; margin-bottom: 10px;">Player Name</label>
+                        <input type="text" name="player_name" value="Virat"
+                            style="padding: 10px; width: 100%; box-sizing: border-box; background: #2a2a2a; border: 1px solid #444; color: white; border-radius: 6px;">
+                    </div>
+                </div>
+
+                <div class="upload-area" id="drop-zone" style="margin-top: 2rem;">
+                    <p style="font-size: 1.2rem; margin-bottom: 1rem;">Drag & Drop Video Here</p>
+                    <p style="color: #888; margin-bottom: 1rem;">or</p>
+                    <input type="file" name="video" id="video-input" accept="video/mp4" style="display: none;">
+                    <button type="button" class="btn btn-secondary"
+                        onclick="document.getElementById('video-input').click()">Browse Files</button>
+                    <p id="file-name" style="margin-top: 1rem; color: var(--accent-color);"></p>
+                </div>
+
+                <div style="text-align: center; margin-top: 2rem;">
+                    <button type="submit" class="btn" style="font-size: 1.1rem; padding: 15px 40px;">Start
+                        Analysis</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const dropZone = document.getElementById('drop-zone');
+        const fileInput = document.getElementById('video-input');
+        const fileNameDisplay = document.getElementById('file-name');
+
+        dropZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropZone.style.borderColor = 'var(--accent-color)';
+            dropZone.style.background = 'rgba(0, 173, 181, 0.1)';
+        });
+
+        dropZone.addEventListener('dragleave', (e) => {
+            e.preventDefault();
+            dropZone.style.borderColor = '#333';
+            dropZone.style.background = 'transparent';
+        });
+
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropZone.style.borderColor = '#333';
+            dropZone.style.background = 'transparent';
+
+            if (e.dataTransfer.files.length) {
+                fileInput.files = e.dataTransfer.files;
+                updateFileName();
+            }
+        });
+
+        fileInput.addEventListener('change', updateFileName);
+
+        function updateFileName() {
+            if (fileInput.files.length > 0) {
+                fileNameDisplay.textContent = "Selected: " + fileInput.files[0].name;
+            }
+        }
+    </script>
+</body>
+
+</html>
